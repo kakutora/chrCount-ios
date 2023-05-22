@@ -8,19 +8,6 @@ const inputBtnSave = document.querySelectorAll(".inputArea__btn--save");
 const inputBtnLoad = document.querySelectorAll(".inputArea__btn--load");
 const newsWrapper = document.querySelector(".news");
 const newsNone = document.querySelector(".news__text--none");
-import text from "./text.json" assert { type: "json" };
-
-if (Object.keys(text.newsList).length) {
-  //jsonからニュース取得
-  newsNone.remove();
-  for (let i = 0; i < Object.values(text.newsList).length; i++) {
-    const createNews = document.createElement("p");
-    createNews.classList.add("news__text");
-    createNews.innerHTML =
-      Object.keys(text.newsList)[i] + " : " + Object.values(text.newsList)[i];
-    newsWrapper.appendChild(createNews);
-  }
-}
 
 t.addEventListener("input", () => {
   chrReset();
@@ -32,6 +19,10 @@ window.addEventListener("load", () => {
     t.innerHTML = localStorage.getItem("chr");
     chrReset();
   }
+});
+inputBtnCopy.addEventListener("click", () => {
+  //コピー
+  navigator.clipboard.writeText(t.value);
 });
 inputBtnClear.addEventListener("click", () => {
   //消去
